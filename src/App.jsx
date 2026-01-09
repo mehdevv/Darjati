@@ -200,7 +200,7 @@ function App() {
   return (
     <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-32 antialiased selection:bg-primary/20">
       {/* Top Navigation / Header */}
-      <header className="pt-6 pb-4 px-6 bg-background-light dark:bg-background-dark sticky top-0 z-30 transition-colors duration-300 border-b border-slate-100 dark:border-slate-800/50">
+      <header className="pt-6 pb-2 px-6 bg-background-light dark:bg-background-dark relative transition-colors duration-300 border-b border-slate-100 dark:border-slate-800/50">
         <div className="flex flex-col items-center justify-center w-full">
           <div className="flex items-center gap-3">
             <span className="text-primary font-bold text-2xl tracking-tight">/ 2CP</span>
@@ -214,7 +214,7 @@ function App() {
                     }`}
                   onClick={() => setActiveSemesterId(semester.id)}
                 >
-                  {semester.id === 1 ? 'S1' : semester.id === 2 ? 'S2' : semester.id === 3 ? 'S3' : 'S4'}
+                  {semester.id === 'sem3' ? 'S3' : 'S4'}
                 </button>
               ))}
             </div>
@@ -226,7 +226,7 @@ function App() {
       </header>
 
       {/* Main Scrollable Content */}
-      <main className="px-4 mt-8 flex flex-col gap-8">
+      <main className="px-4 mt-2 flex flex-col gap-6">
         {/* Hero Card: Current Average */}
         <div className="relative overflow-hidden rounded-[2.5rem] bg-surface-light dark:bg-surface-dark shadow-soft dark:shadow-none p-12 text-center group transition-all duration-300">
           {/* Ambient Glow Effects */}
