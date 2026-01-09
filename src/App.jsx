@@ -200,60 +200,44 @@ function App() {
   return (
     <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-32 antialiased selection:bg-primary/20">
       {/* Top Navigation / Header */}
-      <header className="pt-6 pb-2 px-6 bg-background-light dark:bg-background-dark sticky top-0 z-30 transition-colors duration-300">
-        <div className="flex items-center justify-between mb-1">
-          <h1 className="text-[28px] font-bold tracking-[-0.02em] text-slate-900 dark:text-white leading-tight">
-            {activeSemester.name}
-          </h1>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsChatbotOpen(true)}
-              className="p-2 rounded-full bg-transparent hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors active:scale-95 relative"
-              title="Chat avec l'AI"
-            >
-              <span className="material-symbols-outlined text-slate-600 dark:text-slate-400">smart_toy</span>
-              {useAIReactions && (
-                <span className="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></span>
-              )}
-            </button>
-
+      <header className="pt-6 pb-4 px-6 bg-background-light dark:bg-background-dark sticky top-0 z-30 transition-colors duration-300 border-b border-slate-100 dark:border-slate-800/50">
+        <div className="flex flex-col items-center justify-center w-full">
+          <div className="flex items-center gap-3">
+            <span className="text-primary font-bold text-2xl tracking-tight">/ 2CP</span>
+            <div className="flex bg-slate-100 dark:bg-slate-800/80 p-1 rounded-full shadow-inner ring-1 ring-slate-200 dark:ring-slate-700/50">
+              {semesters.map((semester) => (
+                <button
+                  key={semester.id}
+                  className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${activeSemesterId === semester.id
+                    ? 'bg-white dark:bg-slate-600 text-primary shadow-sm ring-1 ring-slate-100 dark:ring-slate-500/20 scale-100'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+                    }`}
+                  onClick={() => setActiveSemesterId(semester.id)}
+                >
+                  {semester.id === 1 ? 'S1' : semester.id === 2 ? 'S2' : semester.id === 3 ? 'S3' : 'S4'}
+                </button>
+              ))}
+            </div>
           </div>
+          <span className="text-[10px] text-slate-400 font-medium tracking-tight italic mt-1">
+            By kernou mehdi
+          </span>
         </div>
-        <p className="text-slate-500 dark:text-slate-400 text-base font-medium tracking-tight">
-          / 2CP Kolea schools
-        </p>
-        {/* Semester Selector */}
-        <div className="flex gap-2 mt-4 overflow-x-auto no-scrollbar">
-          {semesters.map((semester) => (
-            <button
-              key={semester.id}
-              className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${activeSemesterId === semester.id
-                ? 'bg-primary text-white shadow-soft'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
-                }`}
-              onClick={() => {
-                setActiveSemesterId(semester.id);
-              }}
-            >
-              {semester.name}
-            </button>
-          ))}
-        </div>
-        <div className="h-[1px] w-full bg-slate-200 dark:bg-slate-800 mt-4"></div>
       </header>
 
       {/* Main Scrollable Content */}
-      <main className="px-4 mt-6 flex flex-col gap-6">
+      <main className="px-4 mt-8 flex flex-col gap-8">
         {/* Hero Card: Current Average */}
-        <div className="relative overflow-hidden rounded-2xl bg-surface-light dark:bg-surface-dark shadow-soft dark:shadow-none p-8 text-center group transition-all duration-300">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-surface-light dark:bg-surface-dark shadow-soft dark:shadow-none p-12 text-center group transition-all duration-300">
           {/* Ambient Glow Effects */}
-          <div className="absolute -top-16 -right-16 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/15 transition-all"></div>
-          <div className="absolute -bottom-16 -left-16 w-40 h-40 bg-blue-400/10 rounded-full blur-3xl group-hover:bg-blue-400/15 transition-all"></div>
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px] group-hover:bg-primary/15 transition-all"></div>
+          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-400/10 rounded-full blur-[80px] group-hover:bg-blue-400/15 transition-all"></div>
+
           <div className="relative z-10 flex flex-col items-center justify-center gap-1">
-            <span className={`text-7xl font-bold tracking-tighter drop-shadow-sm ${getAverageClass(currentAverage)}`}>
+            <span className={`text-8xl font-black tracking-tighter drop-shadow-sm transition-all duration-500 ${getAverageClass(currentAverage)}`}>
               {formatAverage(currentAverage)}
             </span>
-            <span className="text-slate-400 dark:text-slate-500 font-medium text-base uppercase tracking-wide">
+            <span className="text-slate-400 dark:text-slate-500 font-extrabold text-sm sm:text-base uppercase tracking-[0.2em] mt-2">
               Moyenne actuelle
             </span>
           </div>
@@ -511,6 +495,16 @@ function App() {
             </div>
           </div>
 
+          <button
+            onClick={() => setIsChatbotOpen(true)}
+            className="w-11 h-11 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-100 dark:border-slate-700 transition-all active:scale-90 relative hover:shadow-xl group"
+            title="Chat avec l'AI"
+          >
+            <span className="material-symbols-outlined text-slate-700 dark:text-slate-200 text-2xl group-hover:rotate-12 transition-transform">smart_toy</span>
+            {useAIReactions && (
+              <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-primary rounded-full border-2 border-white dark:border-slate-800"></span>
+            )}
+          </button>
         </div>
       </div >
 
