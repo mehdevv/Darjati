@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100;
+    font-family: 'Lexend', sans-serif;
+    min-height: 100vh;
+    min-height: max(884px, 100dvh);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .dark .glass-panel {
+    background: rgba(30, 41, 59, 0.85);
+  }
+  
+  .average-red {
+    @apply text-red-500;
+  }
+  
+  .average-orange {
+    @apply text-orange-500;
+  }
+  
+  .average-green {
+    @apply text-emerald-500;
+  }
+  
+  .average-neutral {
+    @apply text-slate-400 dark:text-slate-600;
+  }
+}
